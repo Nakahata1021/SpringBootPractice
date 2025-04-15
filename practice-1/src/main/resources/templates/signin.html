@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>管理者ログイン</title>
+	</head>
+	<body>
+		<h2>管理者ログイン</h2>
+		<form th:action="@{/admin/signin}" method="post" th:object="${loginForm}">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<div>
+				<label for="email">メールアドレス:</label>
+				<input type="text" id="email" th:field="*{email}" required>
+			</div>
+			<div>
+				<label for="password">パスワード:</label>
+				<input type="password" id="password" th:field="*{password}" required>
+			</div>
+			<button type="submit">ログイン</button>
+		</form>
+
+		<div th:if="${param.error}">
+			<p style="color: red;">メールアドレスまたはパスワードが違います。</p>
+		</div>
+
+		<div th:if="${param.logout}">
+			<p style="color: green;">ログアウトしました。</p>
+		</div>
+	</body>
+</html>
+
