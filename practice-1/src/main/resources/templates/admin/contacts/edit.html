@@ -2,25 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	 <title>お問い合わせ編集</title>
+	<title>お問い合わせ編集</title>
 </head>
 <body>
 	<h1>お問い合わせ編集</h1>
-	<form th:action="@{'/admin/contacts/' + ${contact.id} + '/edit'}" th:object="${contact}" method="post">
-		<label>姓: <input type="text" th:field="*{lastName}"/></label><br>
-		<label>名: <input type="text" th:field="*{firstName}"/></label><br>
-		<label>メールアドレス: <input type="email" th:field="*{email}"/></label><br>
-		<label>電話番号: <input type="text" th:field="*{phone}"/></label><br>
-		<label>郵便番号: <input type="text" th:field="*{zipCode}"/></label><br>
-		<label>住所: <input type="text" th:field="*{address}"/></label><br>
-		<label>建物名: <input type="text" th:field="*{buildingName}"/></label><br>
-		<label>お問い合わせ種別: <input type="text" th:field="*{contactType}"/></label><br>
-		<label>内容: <textarea th:field="*{body}"></textarea></label><br>
+
+	<form th:action="@{'/admin/contacts/' + ${contactId} + '/edit'}" th:object="${contactForm}" method="post">
+		<label>姓: <input type="text" th:field="*{lastName}"/></label>
+		<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br>
+
+		<label>名: <input type="text" th:field="*{firstName}"/></label>
+		<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br>
+
+		<label>メールアドレス: <input type="email" th:field="*{email}"/></label>
+		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+
+		<label>電話番号: <input type="text" th:field="*{phone}"/></label>
+		<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span><br>
+
+		<label>郵便番号: <input type="text" th:field="*{zipCode}"/></label>
+		<span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></span><br>
+
+		<label>住所: <input type="text" th:field="*{address}"/></label>
+		<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span><br>
+
+		<label>建物名: <input type="text" th:field="*{buildingName}"/></label>
+		<span th:if="${#fields.hasErrors('buildingName')}" th:errors="*{buildingName}"></span><br>
+
+		<label>お問い合わせ種別: <input type="text" th:field="*{contactType}"/></label>
+		<span th:if="${#fields.hasErrors('contactType')}" th:errors="*{contactType}"></span><br>
+
+		<label>内容: <textarea th:field="*{body}"></textarea></label>
+		<span th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span><br>
 
 		<button type="submit">更新</button>
 	</form>
 
-	<form th:action="@{'/admin/contacts/' + ${contact.id} + '/delete'}" method="post">
+	<form th:action="@{'/admin/contacts/' + ${contactId} + '/delete'}" method="post">
 		<button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
 	</form>
 
